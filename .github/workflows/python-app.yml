@@ -12,14 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: |
-          pip install requests pandas ta python-binance
+      - run: pip install requests pandas ta python-binance
 
-      - name: Run Scanner
-        run: python main.py
+      - run: python main.py
