@@ -1,3 +1,14 @@
+import requests
+
+BOT_TOKEN = "اپنا نیا Bot Token یہاں لکھیں"
+CHAT_ID = "6933246018"
+
+def send_telegram(message):
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    requests.post(url, data={
+        "chat_id": CHAT_ID,
+        "text": message
+    })
 from binance.client import Client
 
 client = Client()
@@ -22,7 +33,7 @@ for coin in coins:
     prev = closes[-2]
 
     if prev < ema21 and last > ema21:
-        print(f"🟢 BUY Signal: {coin}")
+    send_telegram(f"🟢 BUY Signal: {coin}")
 
-    elif prev > ema21 and last < ema21:
-        print(f"🔴 SELL Signal: {coin}")
+elif prev > ema21 and last < ema21:
+    send_telegram(f"🔴 SELL Signal: {coin}")
