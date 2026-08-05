@@ -1,6 +1,6 @@
 import requests
 
-BOT_TOKEN = "اپنا نیا Bot Token یہاں لکھیں"
+BOT_TOKEN = "اپنا8924616873:AAE0DGTokAjsEFkAOccsIjx4LC93t3uOIZs"
 CHAT_ID = "6933246018"
 
 def send_telegram(message):
