@@ -1,6 +1,7 @@
 import requests
+from binance.client import Client
 
-BOT_TOKEN = "اپنا8924616873:AAE0DGTokAjsEFkAOccsIjx4LC93t3uOIZs"
+BOT_TOKEN = "8924616873:AAFN180BoYZF9Q0Qs5SabrLB38FN_YmBLxo"
 CHAT_ID = "6933246018"
 
 def send_telegram(message):
@@ -9,7 +10,6 @@ def send_telegram(message):
         "chat_id": CHAT_ID,
         "text": message
     })
-from binance.client import Client
 
 client = Client()
 
@@ -23,7 +23,11 @@ coins = [
 print("🚀 Crypto EMA Scanner Started")
 
 for coin in coins:
-    klines = client.get_klines(symbol=coin, interval=Client.KLINE_INTERVAL_5MINUTE, limit=30)
+    klines = client.get_klines(
+        symbol=coin,
+        interval=Client.KLINE_INTERVAL_5MINUTE,
+        limit=30
+    )
 
     closes = [float(k[4]) for k in klines]
 
@@ -33,7 +37,7 @@ for coin in coins:
     prev = closes[-2]
 
     if prev < ema21 and last > ema21:
-    send_telegram(f"🟢 BUY Signal: {coin}")
+        send_telegram(f"🟢 BUY Signal: {coin}")
 
-elif prev > ema21 and last < ema21:
-    send_telegram(f"🔴 SELL Signal: {coin}")
+    elif prev > ema21 and last < ema21:
+        send_telegram(f"🔴 SELL Signal: {coin}")
